@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediaInfo</title>
+  <!-- CssPrincipal -->
+  <link rel="stylesheet" href="main.css">
+  <!-- Boostrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&family=Ubuntu:wght@300&display=swap"
+    rel="stylesheet">
+  <!-- toastify -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <!-- App -->
+  <script src="./app/signinForm.js" type="module"></script>
+</head>
+
+<body class="bg-custom-color d-flex justify-content-center align-items-center vh-100">
+  <div class="bg-color-form  p-5 rounded-5 text-secondary shadow" style="width: 26rem">
+    <div class="d-flex justify-content-center">
+      <img src="https://firebasestorage.googleapis.com/v0/b/mediainfo-82855.appspot.com/o/Icons%2FLogo.svg?alt=media&token=2edc7ac3-045a-4c44-953b-8de8f348dcc9" alt="login-icon" style="height: 6rem" />
+    </div>
+    <div class="font-family fs-1 fw-bold text-color ">Login</div>
+    <form id="signin-form">
+      <label class="mt-4 mb-1 fw-semibold text-color" for="signin-email">Email</label>
+      <div class="input-group mb-1">
+        <div class="input-group-text bg-transparent">
+          <img src="https://firebasestorage.googleapis.com/v0/b/mediainfo-82855.appspot.com/o/Icons%2Femail-icon.svg?alt=media&token=646f1734-c197-4e6d-998a-d2bf9333f225" alt="email-icon" style="height: 1rem" />
+        </div>
+        <input id="signin-email" name="email" class="form-control bg-light" type="email" placeholder="ejemplo@gmail.com"
+          required />
+      </div>
+      <label class="fw-semibold text-color" for="signin-password">Constraseña</label>
+      <div class="input-group mt-1">
+        <div class="input-group-text bg-transparent">
+          <img src="https://firebasestorage.googleapis.com/v0/b/mediainfo-82855.appspot.com/o/Icons%2Fpass-icon.svg?alt=media&token=3f1d82a9-edcc-453a-a94e-f9808713f420" alt="password-icon" style="height: 1rem" />
+        </div>
+        <input id="signin-password" name="password" class="form-control bg-light" type="password"
+          placeholder="***********" required />
+      </div>
+      <div class="d-flex justify-content-around mt-1">
+        <div class="pt-1">
+          <a href="#" class="text-decoration-none text-primary fw-semibold fst-italic"
+            style="font-size: 0.9rem">¿Olvidaste tu constraseña?</a>
+        </div>
+      </div>
+      <button type="submit" class="btn text-white w-100 mt-4 fw-semibold shadow-sm" style="background-color: #83578F;">
+        Login
+      </button>
+    </form>
+    <div class="text-dark d-flex gap-1 justify-content-center mt-1">
+      <div>¿Aun no tienes una cuenta?</div>
+      <a href="./signupForm.html" class="text-decoration-none text-primary fw-semibold">Registrarse</a>
+    </div>
+    <div class="p-3">
+      <div class="text-center" style="height: 0.9rem">
+        <span class="text-dark bg-transparent px-3">o</span>
+      </div>
+      <button id="googleLogin" type="button" class="btn d-flex w-100 gap-3 justify-content-center border mt-4 shadow-sm"
+        style="background-color: #e0e0e0;">
+        <img src="https://firebasestorage.googleapis.com/v0/b/mediainfo-82855.appspot.com/o/Icons%2Fgoogle-icon.svg?alt=media&token=d61ab2f9-ac0b-4618-aa4b-3400cb2177bb" alt="google-icon" style="height: 1.6rem" />
+        <div class="fw-semibold text-dark">Continuar con Google</div>
+      </button>
+    </div>
+    <!-- boostrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"></script>
+    <!-- toastify -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</body>
+
+</html>

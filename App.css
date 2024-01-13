@@ -1,0 +1,106 @@
+.bg-custom-color {
+    background-color: #103F52;
+}
+.bg-color-form{
+    background-color: #7EA6BF;
+} 
+.font-family{
+    font-family: 'Fredoka', sans-serif;
+}
+.text-color{
+    color: #83578F;
+    font-weight: bold;
+    font-size: 20px;
+}
+.navbar {
+    transition: top 0.6s;
+}
+.navbar.hide {
+    top: -50px;
+}
+body{
+    background-color: #103F52;
+}
+
+.overflow-auto {
+    overflow-x: auto;
+    min-width: 1140px;
+}
+.card {
+    min-width: 416px;
+    min-height: 620px;
+    border: 2px solid black;
+    border-radius: 5px; 
+    transition: transform 0.5s ease-in-out;
+    transform: scale(0.95); /* La tarjeta comienza al 95% de su tamaño original */
+    transform-origin: center center; /* La tarjeta se agranda desde el centro */
+}
+.card:hover {
+    transform: scale(1.0); /* La tarjeta se agranda al 100% cuando el cursor está encima */
+}
+.card-body{
+    min-height: 220px;
+}
+.card-img-top {
+    object-fit: cover; 
+    transform: scale(1.003); /* La tarjeta comienza al 95% de su tamaño original */
+    min-width: 400px;
+    min-height: 400px;
+    max-width: 450px;
+    max-height: 400px;
+}
+
+.card-text {
+    color: black;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Número de líneas que quieres mostrar */
+    -webkit-box-orient: vertical;
+}
+.card-title{
+    font-weight: bold
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    margin: 0;
+    background-color: #1F6D8C;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+.dropdown-item{
+    color: white;
+}
+.nav-item{
+    right: 0%;
+}
+
+#White-text{
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.text-muted {
+    color: #aaa; 
+}
+
+@media only screen and (max-width: 600px) {
+  .overflow-auto {
+    min-width: 100%; /* Ajusta este valor al ancho que desees para dispositivos móviles */
+  }
+}
+
+/* Esto hará que la barra de desplazamiento sea transparente */
+.row.flex-row.flex-nowrap.overflow-auto::-webkit-scrollbar {
+    height: 0; /* Ajusta esto al grosor que desees para la barra de desplazamiento horizontal */
+}
+
+.row.flex-row.flex-nowrap.overflow-auto::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+.row.flex-row.flex-nowrap.overflow-auto::-webkit-scrollbar-thumb {
+    background: transparent;
+}

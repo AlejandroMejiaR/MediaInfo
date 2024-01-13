@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediaInfo</title>
+  <!-- CssPrincipal -->
+  <link rel="stylesheet" href="main.css">
+  <!-- Boostrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&family=Ubuntu:wght@300&display=swap"
+    rel="stylesheet">
+  <!-- toastify -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <!-- App -->
+  <script src="./app/signupForm.js" type="module"></script>
+
+</head>
+
+<body class="bg-custom-color d-flex justify-content-center align-items-center vh-100">
+  <div class="bg-color-form  p-5 rounded-5 text-secondary shadow" style="width: 26rem">
+    <div class="d-flex justify-content-center">
+      <img src="https://firebasestorage.googleapis.com/v0/b/mediainfo-82855.appspot.com/o/Icons%2FLogo.svg?alt=media&token=2edc7ac3-045a-4c44-953b-8de8f348dcc9" alt="login-icon" style="height: 6rem" />
+    </div>
+    <div class="font-family fs-1 fw-bold text-color">Register</div>
+    <form id="signup-form">
+      <label class="mt-4 mb-1 fw-semibold text-color" for="signup-email">Email</label>
+      <div class="input-group mb-1">
+        <div class="input-group-text bg-transparent">
+          <i class="bi bi-envelope"></i>
+          <img src="https://firebasestorage.googleapis.com/v0/b/mediainfo-82855.appspot.com/o/Icons%2Femail-icon.svg?alt=media&token=646f1734-c197-4e6d-998a-d2bf9333f225" alt="envelope-icon" style="height: 1rem" />
+        </div>
+        <input id="signup-email" name="email" class="form-control bg-light " type="email"
+          placeholder="ejemplo@gmail.com" required />
+      </div>
+      <label class="fw-semibold text-color" for="signup-user">Usuario</label>
+      <div class="input-group mt-1 mb-1">
+        <div class="input-group-text bg-transparent">
+          <img src="https://firebasestorage.googleapis.com/v0/b/mediainfo-82855.appspot.com/o/Icons%2Fuser-icon.svg?alt=media&token=0b552424-215c-419f-925a-7f3a02ea7495" alt="username-icon" style="height: 1rem" />
+        </div>
+        <input id="signup-user" name="username" class="form-control bg-light" type="text" placeholder="usuario"
+          required />
+      </div>
+      <label class="fw-semibold text-color" for="signup-password">Constraseña</label>
+      <div class="input-group mt-1 mb-1">
+        <div class="input-group-text bg-transparent">
+          <img src="https://firebasestorage.googleapis.com/v0/b/mediainfo-82855.appspot.com/o/Icons%2Fpass-icon.svg?alt=media&token=3f1d82a9-edcc-453a-a94e-f9808713f420" alt="password-icon" style="height: 1rem" />
+        </div>
+        <input id="signup-password" name="password" class="form-control bg-light" type="password"
+          placeholder="**********" />
+      </div>
+      <label class="fw-semibold text-color" for="signup-rol">Rol</label>
+      <div class="input-group mt-1 mb-1">
+        <div class="input-group-text bg-transparent">
+          <img src="https://firebasestorage.googleapis.com/v0/b/mediainfo-82855.appspot.com/o/Icons%2Frol-icon.svg?alt=media&token=cd24a11c-e99f-49c3-9d42-e967d87efb75" alt="rol-icon" style="height: 1rem" />
+        </div>
+        <select id="signup-rol" class="form-select text-secondary" aria-label="Default select example">
+          <option value="Lector">Lector</option>
+          <option value="Autor">Autor</option>
+        </select>
+      </div>
+      <button type="submit" class="btn text-white w-100 mt-4 fw-semibold shadow-sm" style="background-color: #83578F;">
+        Registrarse
+      </button>
+    </form>
+    <div class="text-dark d-flex gap-1 justify-content-center mt-1">
+      <div>¿Ya tienes una cuenta?</div>
+      <a href="index.html" class="text-decoration-none text-primary fw-semibold">Login</a>
+    </div>
+  </div>
+  <!-- boostrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <!-- toastify -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</body>
+
+</html>
