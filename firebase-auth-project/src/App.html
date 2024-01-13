@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MediaInfo</title>
+    <!-- Boostrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&family=Ubuntu:wght@300&display=swap"
+        rel="stylesheet">
+    <!-- toastify -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!-- CssPrincipal-->
+    <link rel="stylesheet" href="./App.css">
+    <!-- App -->
+    <script src="./app/loginCheck.js" type="module"></script>
+    <script src="./app/App.js" type="module"></script>
+    
+</head>
+
+<body>
+    <header class="p-3 mb-3 bg-dark">
+        <div class="container header">
+            <div class="row align-items-center">
+                <div class="col-3 text-center text-lg-start">
+                    <ul class="nav justify-content-center justify-content-lg-start mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a href="#"
+                                class="nav-link px-2 link-body-emphasis dropdown-toggle text-color">Secciones</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Economia</a>
+                                <a class="dropdown-item" href="#">Agricultura</a>
+                                <a class="dropdown-item" href="#">Industria</a>
+                                <a class="dropdown-item" href="#">Educación</a>
+                                <a class="dropdown-item" href="#">Internacionales</a>
+                                <a class="dropdown-item" href="#">Deportes</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col text-center">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/mediainfo-82855.appspot.com/o/Icons%2FLogo.svg?alt=media&token=2edc7ac3-045a-4c44-953b-8de8f348dcc9" style="max-width: 100%; max-height: 60px;" class="Logo img-fluid">
+                </div>
+
+                <div class="col-3 text-center text-lg-end">
+                    <div class="d-flex align-items-center justify-content-start" style="position: relative; left: 15%;">
+                        <form class="d-inline-block mb-2 mb-lg-0 me-lg-2" role="search">
+                            <input type="search" class="form-control" placeholder="Buscar..." aria-label="Buscar">
+                        </form>
+                        <div class="dropdown text-end d-inline-block">
+                            <a href="#"
+                                class="d-block link-body-emphasis text-decoration-none dropdown-toggle text-color">
+                                <img src="https://firebasestorage.googleapis.com/v0/b/mediainfo-82855.appspot.com/o/Icons%2Fuser-icon-white.png?alt=media&token=58f161c7-1df6-4ffe-8fb1-9b1b62ef5399" style="max-width: 35px; max-height: 25px;"
+                                    class="rounded-circle img-fluid">
+                            </a>
+                            <ul class="dropdown-menu text-small ">
+                                <li><a class="dropdown-item create" href="./crearArticulo.html">Nuevo Artículo</a></li>
+                                <li><a id="logout" class="dropdown-item" href="#">Cerrar sesión</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2 id="White-text" class="text-left mb-3">Ultimos Artículos</h2>
+        <!-- Todos los articulos -->
+        <div class="row flex-row flex-nowrap overflow-auto" id="tasks-container"></div>
+        <!-- Deportes -->
+        <h2 id="White-text" class="text-left mb-3 mt-3">Deportes</h2>
+        <div class="row flex-row flex-nowrap overflow-auto" id="tasks-container-deportes"></div>
+        <!-- Economia -->
+        <h2 id="White-text" class="text-left mb-3 mt-3">Economia</h2>
+        <div class="row flex-row flex-nowrap overflow-auto">
+            <!-- Artículo 1 -->
+            <div class="col-12 col-sm-6 col-md-4 me-5">
+                <div class="card card-block">
+                    <img src="./assets/perro.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-2 text-muted">
+                            <span>Nombre del autor</span>
+                            <span>Fecha</span>
+                        </div>
+                        <h5 class="card-title">Título del artículo 1</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+                            ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
+                            montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                            quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec,
+                            vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam
+                            dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum
+                            semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat
+                            vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.
+                            Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam
+                            ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus.
+                            Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet
+                            adipiscing sem neque sed ipsum. N</p>
+                        <button href="#" class="btn btn-primary btn-ver">Ver</button>
+                        <button href="#" class="btn btn-primary btn-comment">Comentarios</button>
+                        <button href="#" class="btn btn-primary btn-edit create">Editar</button>
+                        <button href="#" class="btn btn-primary btn-delete admin">Ocultar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <!-- boostrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <!-- toastify -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+</body>
+
+</html>

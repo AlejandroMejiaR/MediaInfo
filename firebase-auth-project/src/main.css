@@ -1,0 +1,19 @@
+.bg-custom-color {
+    background-color: #103F52;
+  }
+.bg-color-form{
+    background-color: #7EA6BF;
+} 
+.font-family{
+    font-family: 'Fredoka', sans-serif;
+}
+.text-color{
+    color: #83578F;
+}
+
+.dropdown {
+    position: relative;
+    right: -60%;
+}
+
+
