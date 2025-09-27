@@ -2,19 +2,22 @@ import { GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/fir
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js"
 import { auth } from './firebase.js'
 import { showMessage } from './showMessage.js'
-const googleButton = document.querySelector('#googleLogin')
+
+// Se corrige el selector para que coincida con el id 'google-login' del HTML
+const googleButton = document.querySelector('#google-login') 
 const signInForm = document.querySelector('#signin-form')
+
 signInForm.addEventListener('submit', async (e) => {
     e.preventDefault()
     const email = signInForm['signin-email'].value;
     const password = signInForm['signin-password'].value;
+
     try {
         const userCredentials = await signInWithEmailAndPassword(auth, email, password);
         console.log(userCredentials)
         window.location.href = 'App.html';
         //showMessage("welcome " + userCredentials.user.email)
     } catch (error) {
-        //console.log(error)
         if (error.code === 'auth/wrong-password') {
             showMessage("Contraseña incorrecta. ", "error");
         }
