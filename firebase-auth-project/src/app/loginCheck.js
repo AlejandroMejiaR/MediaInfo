@@ -7,8 +7,8 @@ const logoutButton = document.querySelector('#logout');
 // Redirige si el usuario no está autenticado
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
-        // Redirección relativa a la página de login (index.html)
-        window.location.href = '../index.html';
+        // Redirección a la raíz del sitio en GitHub Pages
+        window.location.href = '/MediaInfo/';
     } else {
         // Muestra el mensaje de bienvenida solo una vez por sesión
         if (!sessionStorage.getItem('welcomeMessageShown')) {
@@ -23,5 +23,4 @@ logoutButton.addEventListener('click', async () => {
     // Limpiamos la bandera de bienvenida al cerrar sesión
     sessionStorage.removeItem('welcomeMessageShown'); 
     await signOut(auth);
-    // onAuthStateChanged se encargará de la redirección después del signOut
 });
