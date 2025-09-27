@@ -1,74 +1,25 @@
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js"
-import { signOut } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js"
-import { auth } from './firebase.js'
-import { showMessage } from './showMessage.js'
-import {
-    onGetUsers,
-} from "./firebase.js";
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+import { auth } from './firebase.js';
+import { showMessage } from './showMessage.js';
 
+const logoutButton = document.querySelector('#logout');
 
-const logout = document.querySelector('#logout');
-
+// Redirige si el usuario no está autenticado
 onAuthStateChanged(auth, async (user) => {
-    //console.log(user)
     if (!user) {
         window.location.href = 'index.html';
     } else {
-        // Verificar si el mensaje de bienvenida ya se mostró
+        // Muestra el mensaje de bienvenida solo una vez por sesión
         if (!sessionStorage.getItem('welcomeMessageShown')) {
-            showMessage("Bienvenido " + user.displayName);
-            // Guardar la bandera en el sessionStorage
+            showMessage(`Bienvenido ${user.displayName || user.email}`);
             sessionStorage.setItem('welcomeMessageShown', 'true');
         }
     }
-})
-
-
-//logout
-logout.addEventListener('click', async () => {
-    await signOut(auth);
-    //console.log('signout')
-})
-
-//Roles
-const createitem = document.querySelectorAll('.create');
-const adminitem = document.querySelectorAll('.admin');
-
-window.addEventListener("DOMContentLoaded", async (e) => {
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            const userId = user.uid;  // Obtener la ID del usuario logueado
-            onGetUsers((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    const users = doc.id;
-                    //console.log(users);
-                    if (users == userId) {  // Comparar con los ID en la colección 'users'
-                        const rol = doc.data().rol;  // Obtener el 'rol'
-                       // console.log(`Nombre: ${nombre}, Rol: ${rol}`);
-                        if (rol === "Lector") {
-                            // Oculta los elementos
-                            createitem.forEach(element => element.style.display = "none");
-                            adminitem.forEach(element => element.style.display = "none");
-                        }
-                        else if(rol === "Autor"){
-                            adminitem.forEach(element => element.style.display = "none");
-                        }
-                    }
-                });
-            });
-        }
-    });
 });
 
-//
-
-
-
-
-
-
-
-
-
-
-
+// Maneja el cierre de sesión
+logoutButton.addEventListener('click', async () => {
+    // Limpiamos la bandera de bienvenida al cerrar sesión
+    sessionStorage.removeItem('welcomeMessageShown'); 
+    await signOut(auth);
+});
