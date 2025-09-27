@@ -15,7 +15,7 @@ signInForm.addEventListener('submit', async (e) => {
     try {
         const userCredentials = await signInWithEmailAndPassword(auth, email, password);
         console.log(userCredentials)
-        window.location.href = 'App.html';
+        window.location.href = 'firebase-auth-project/src/App.html';
         //showMessage("welcome " + userCredentials.user.email)
     } catch (error) {
         if (error.code === 'auth/wrong-password') {
@@ -36,7 +36,7 @@ googleButton.addEventListener('click', async () => {
     try {
         const googleuserCredentials = await signInWithPopup(auth, provider);
         //console.log(googleuserCredentials)
-        window.location.href = 'App.html';
+        window.location.href = 'firebase-auth-project/src/App.html';
         //showMessage("welcome " + googleuserCredentials.user.displayName)
     } catch (error) {
         //console.log(error)
