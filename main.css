@@ -1,5 +1,4 @@
-/* Estilos para el cuerpo de la página de inicio de sesión */
-.body-signin {
+body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background: linear-gradient(to right, #4A00E0, #8E2DE2);
@@ -10,8 +9,7 @@
     align-items: center;
 }
 
-/* Contenedor del formulario */
-.container-signin {
+.container {
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     padding: 2rem;
@@ -21,7 +19,6 @@
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-/* Estilos del formulario */
 .form {
     display: flex;
     flex-direction: column;
@@ -94,7 +91,7 @@
 .form__text {
     margin-top: 1.5rem;
     font-size: 0.9rem;
-    color: black;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .form__link {
@@ -120,7 +117,7 @@
     border: 1px solid #ccc;
     border-radius: 25px;
     background-color: #fff;
-    color: black;
+    color: #757575;
     font-size: 1rem;
     display: flex;
     align-items: center;
@@ -143,4 +140,8 @@
     width: 100%;
     height: 100%;
     z-index: -1;
+}
+
+.text-black {
+    color: black;
 }
