@@ -50,8 +50,7 @@ forgotPassword.addEventListener('click', async (e) => {
     }
     try {
         await sendPasswordResetEmail(auth, email);
-        const resetPasswordModal = new bootstrap.Modal(document.getElementById('resetPasswordModal'));
-        resetPasswordModal.show();
+        showMessage("Se ha enviado un correo electrónico a la dirección proporcionada con instrucciones para restablecer su contraseña.");
     } catch (error) {
         if (error.code === 'auth/user-not-found') {
             showMessage("El usuario no esta registrado. ", "error");
