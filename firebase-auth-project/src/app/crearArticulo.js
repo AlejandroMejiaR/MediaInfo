@@ -13,14 +13,17 @@ const dia = fecha.getDate();
 const mes = fecha.getMonth() + 1;
 const ano = fecha.getFullYear();
 const fechaString = `${dia}/${mes}/${ano}`;
+
 let autor = "";
+let authorId = ""; // Variable para el UID del autor
 let editStatus = false;
 let id = '';
 
-// Obtener nombre del usuario
+// Obtener nombre y UID del usuario
 onAuthStateChanged(auth, (user) => {
     if (user) {
         autor = user.displayName;
+        authorId = user.uid; // Guardamos el UID
     }
 });
 
@@ -53,10 +56,15 @@ taskForm.addEventListener("submit", async (e) => {
     const section = taskForm["task-section"].value;
     const imageUrl = taskForm["task-image-url"].value; // Obtener la URL de la imagen del campo de texto
 
+    if (!authorId) {
+        showMessage("Error: Usuario no autenticado.", "error");
+        return;
+    }
+
     try {
         if (!editStatus) {
-            // Creando un nuevo post
-            await savePost(autor, title, description, section, fechaString, imageUrl);
+            // Creando un nuevo post, ahora pasamos el authorId
+            await savePost(authorId, autor, title, description, section, fechaString, imageUrl);
             showMessage("El articulo ha sido publicado ");
         } else {
             // Actualizando un post existente

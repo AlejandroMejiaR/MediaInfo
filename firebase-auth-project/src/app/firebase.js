@@ -27,16 +27,17 @@
 //Firstore
 /**
  * Save a New Task in Firestore
+ * @param {string} authorId the ID of the author
+ * @param {string} autor the name of the author
  * @param {string} title the title of the Task
- * @param {string} section the description of the Task
- * @param {string} fecha the description of the Task
- * @param {string} autor the description of the Task
  * @param {string} description the description of the Task
+ * @param {string} section the section of the Task
+ * @param {string} fecha the date of the Task
  * @param {string} imageUrl the URL of the image for the Task
  * 
  */
-export const savePost = (autor,title, description,section,fecha,imageUrl) =>
-  addDoc(collection(db, "post"), { autor,title, description,section,fecha,imageUrl });
+export const savePost = (authorId, autor, title, description, section, fecha, imageUrl) =>
+  addDoc(collection(db, "post"), { authorId, autor, title, description, section, fecha, imageUrl });
 
   export const onGetPosts = (callback, filter = null) => {
     let collectionRef = collection(db, "post");

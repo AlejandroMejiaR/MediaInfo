@@ -8,9 +8,12 @@ const tasksContainerDeportes = document.getElementById("tasks-container-deportes
 const createItems = document.querySelectorAll('.create');
 const adminItems = document.querySelectorAll('.admin');
 
-// --- Lógica de Roles ---
+let currentUserId = null;
+
+// --- Lógica de Roles y UI Global ---
 const setupUIForUser = async (user) => {
     if (user) {
+        currentUserId = user.uid;
         const userDocRef = doc(db, "users", user.uid);
         const userDocSnap = await getDoc(userDocRef);
 
@@ -27,6 +30,7 @@ const setupUIForUser = async (user) => {
             adminItems.forEach(item => item.style.display = 'none');
         }
     } else {
+        currentUserId = null;
         createItems.forEach(item => item.style.display = 'none');
         adminItems.forEach(item => item.style.display = 'none');
     }
@@ -35,9 +39,15 @@ const setupUIForUser = async (user) => {
 // --- Carga de Artículos y Eventos ---
 window.addEventListener("DOMContentLoaded", () => {
     onAuthStateChanged(auth, user => {
-        setupUIForUser(user);
+        setupUIForUser(user).then(() => {
+            // Volver a cargar los posts después de que la UI del usuario esté configurada
+            loadAllPosts();
+            loadDeportesPosts();
+        });
     });
+});
 
+const loadAllPosts = () => {
     onGetPosts((querySnapshot) => {
         let html = "";
         querySnapshot.forEach((doc) => {
@@ -46,7 +56,9 @@ window.addEventListener("DOMContentLoaded", () => {
         });
         tasksContainer.innerHTML = html;
     });
+};
 
+const loadDeportesPosts = () => {
     onGetPosts((querySnapshot) => {
         let html = "";
         querySnapshot.forEach((doc) => {
@@ -55,9 +67,16 @@ window.addEventListener("DOMContentLoaded", () => {
         });
         tasksContainerDeportes.innerHTML = html;
     }, where('section', '==', 'deportes'));
-});
+};
 
-const renderTask = (id, task) => `
+const renderTask = (id, task) => {
+    // Lógica para mostrar el botón de editar solo al autor
+    const isAuthor = currentUserId && currentUserId === task.authorId;
+    const editButton = isAuthor 
+        ? `<button class="btn btn-primary btn-edit">Editar</button>`
+        : '';
+
+    return `
     <div class="col-12 col-sm-6 col-md-4 me-5" data-id="${id}">
         <div class="card card-block">
             <img src="${task.imageUrl}" class="card-img-top" alt="imagenArticulo">
@@ -68,14 +87,19 @@ const renderTask = (id, task) => `
                 </div>
                 <h5 class="card-title">${task.title}</h5>
                 <p class="card-text">${task.description}</p>
-                <div class="mt-auto">
-                    <button class="btn btn-primary btn-comment" data-bs-toggle="modal" data-bs-target="#commentsModal">Comentarios</button>
-                    <button class="btn btn-primary btn-edit create">Editar</button>
-                    <button class="btn btn-primary btn-delete admin">Ocultar</button>
+                <div class="mt-auto d-flex justify-content-between">
+                    <div>
+                        <button class="btn btn-primary btn-comment" data-bs-toggle="modal" data-bs-target="#commentsModal">Comentarios</button>
+                    </div>
+                    <div>
+                        ${editButton}
+                        <button class="btn btn-primary btn-delete admin">Ocultar</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>`;
+};
 
 document.body.addEventListener('click', (event) => {
     const target = event.target;
