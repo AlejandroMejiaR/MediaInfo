@@ -101,6 +101,12 @@ document.body.addEventListener('click', (event) => {
             cardBody.style.height = '220px';
             target.textContent = 'Ver';
         }
+    } else if (target.classList.contains('btn-edit')) {
+        const card = target.closest('[data-id]');
+        if (card) {
+            const postId = card.dataset.id;
+            window.location.href = `./crearArticulo.html?id=${postId}`;
+        }
     }
 });
 
