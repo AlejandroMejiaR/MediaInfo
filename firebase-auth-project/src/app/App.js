@@ -75,7 +75,7 @@ const renderTask = (id, task) => `
                 </div>
                 <h5 class="card-title">${task.title}</h5>
                 <p class="card-text" style="height: 120px; overflow-y: auto;">${task.description}</p>
-                <button class="btn btn-primary btn-comment">Comentarios</button>
+                <button class="btn btn-primary btn-comment" data-bs-toggle="modal" data-bs-target="#commentsModal">Comentarios</button>
                 <button class="btn btn-primary btn-edit create">Editar</button>
                 <button class="btn btn-primary btn-delete admin">Ocultar</button>
             </div>
@@ -92,11 +92,28 @@ document.body.addEventListener('click', (event) => {
 
     if (target.classList.contains('btn-edit')) {
         window.location.href = `./crearArticulo.html?id=${postId}`;
-    } else if (target.classList.contains('btn-comment')) {
-        window.location.href = `./comentarios.html?id=${postId}`;
     }
 });
 
+// --- Lógica del Modal de Comentarios ---
+const commentsModal = document.getElementById('commentsModal');
+if (commentsModal) {
+    commentsModal.addEventListener('show.bs.modal', event => {
+        // Botón que ha activado el modal
+        const button = event.relatedTarget;
+        
+        // Extraer el ID del artículo de la tarjeta padre
+        const card = button.closest('[data-id]');
+        const postId = card.dataset.id;
+
+        // Aquí cargaremos los comentarios para el postId
+        console.log("Abrir modal para el post:", postId);
+
+        // Guardar el postId en el modal para usarlo al enviar un nuevo comentario
+        const form = commentsModal.querySelector('#comment-form');
+        form.dataset.postId = postId;
+    });
+}
 
 // --- Lógica de Scroll Horizontal ---
 const setupHorizontalScroll = (container) => {
