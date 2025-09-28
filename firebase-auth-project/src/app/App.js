@@ -68,14 +68,13 @@ const renderTask = (id, task) => `
     <div class="col-12 col-sm-6 col-md-4 me-5" data-id="${id}">
         <div class="card card-block">
             <img src="${task.imageUrl}" class="card-img-top" alt="imagenArticulo">
-            <div class="card-body">
+            <div class="card-body" style="height: 320px;">
                 <div class="d-flex justify-content-between mb-2 text-muted">
                     <span>${task.autor}</span>
                     <span>${task.fecha}</span>
                 </div>
                 <h5 class="card-title">${task.title}</h5>
-                <p class="card-text">${task.description}</p>
-                <button class="btn btn-primary btn-ver">Ver</button>
+                <p class="card-text" style="height: 120px; overflow-y: auto;">${task.description}</p>
                 <button class="btn btn-primary btn-comment">Comentarios</button>
                 <button class="btn btn-primary btn-edit create">Editar</button>
                 <button class="btn btn-primary btn-delete admin">Ocultar</button>
@@ -86,27 +85,15 @@ const renderTask = (id, task) => `
 // --- Event Delegation para los botones de las tarjetas ---
 document.body.addEventListener('click', (event) => {
     const target = event.target;
-    if (target.classList.contains('btn-ver')) {
-        const cardBody = target.closest('.card-body');
-        const cardText = cardBody.querySelector('.card-text');
+    const card = target.closest('[data-id]');
+    if (!card) return;
 
-        if (cardText.style.overflow !== 'visible') {
-            cardText.style.overflow = 'visible';
-            cardText.style.height = '480px';
-            cardBody.style.height = '630px';
-            target.textContent = 'Dejar de ver';
-        } else {
-            cardText.style.overflow = 'hidden';
-            cardText.style.height = 'auto';
-            cardBody.style.height = '220px';
-            target.textContent = 'Ver';
-        }
-    } else if (target.classList.contains('btn-edit')) {
-        const card = target.closest('[data-id]');
-        if (card) {
-            const postId = card.dataset.id;
-            window.location.href = `./crearArticulo.html?id=${postId}`;
-        }
+    const postId = card.dataset.id;
+
+    if (target.classList.contains('btn-edit')) {
+        window.location.href = `./crearArticulo.html?id=${postId}`;
+    } else if (target.classList.contains('btn-comment')) {
+        window.location.href = `./comentarios.html?id=${postId}`;
     }
 });
 
