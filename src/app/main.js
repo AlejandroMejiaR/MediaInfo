@@ -2,14 +2,14 @@ import { sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.5.
 import { auth } from './firebase.js';
 import { showMessage } from './showMessage.js';
 
-document.addEventListener("DOMContentLoaded", () => {
-    const forgotPasswordLink = document.querySelector('#forgot-password');
+document.addEventListener('DOMContentLoaded', () => {
+    const forgotPasswordLink = document.getElementById('forgot-password');
 
     if (forgotPasswordLink) {
         forgotPasswordLink.addEventListener('click', async (e) => {
             e.preventDefault();
 
-            const email = prompt("Por favor, ingrese su correo electrónico para restablecer la contraseña:");
+            const email = prompt("Por favor, ingresa tu correo electrónico para restablecer la contraseña:");
 
             if (email) {
                 try {

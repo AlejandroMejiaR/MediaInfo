@@ -1,8 +1,0 @@
-# Archivo de configuración de Firebase
-src/app/config.js
-
-# Archivos del sistema operativo
-.DS_Store
-
-# Dependencias
-node_modules

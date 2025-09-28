@@ -58,7 +58,7 @@ const loadPosts = () => {
 const renderTask = (id, task) => {
     const isAuthor = currentUserId && currentUserId === task.authorId;
     const editButton = isAuthor 
-        ? `<button class="btn btn-primary btn-edit">Editar</button>`
+        ? `<button class=\"btn btn-primary btn-edit\">Editar</button>`
         : '';
 
     return `
@@ -93,7 +93,7 @@ document.body.addEventListener('click', async (event) => {
     const postId = card.dataset.id;
 
     if (target.classList.contains('btn-edit')) {
-        window.location.href = `./crearArticulo.html?id=${postId}`;
+        window.location.href = `crearArticulo.html?id=${postId}`;
     }
 
     if (target.classList.contains('btn-read-more')) {
@@ -142,7 +142,7 @@ if (commentsModal) {
                         <div class="card mb-2">
                             <div class="card-body">
                                 <p class="card-text">${comment.text}</p>
-                                <footer class="blockquote-footer text-end">${comment.authorName} <cite title="Source Title">- ${date}</cite></footer>
+                                <footer class="blockquote-footer text-end">${comment.authorName} <cite title=\"Source Title\">- ${date}</cite></footer>
                             </div>
                         </div>
                     `;

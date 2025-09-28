@@ -16,7 +16,7 @@ signInForm.addEventListener('submit', async (e) => {
     try {
         const userCredentials = await signInWithEmailAndPassword(auth, email, password);
         console.log(userCredentials)
-        window.location.href = './src/articles.html';
+        window.location.href = 'articles.html';
     } catch (error) {
         if (error.code === 'auth/wrong-password') {
             showMessage("Contraseña incorrecta. ", "error");
@@ -34,7 +34,7 @@ googleButton.addEventListener('click', async () => {
     const provider = new GoogleAuthProvider()
     try {
         const googleuserCredentials = await signInWithPopup(auth, provider);
-        window.location.href = './src/articles.html';
+        window.location.href = 'articles.html';
     } catch (error) {
         console.log(error)
     }
