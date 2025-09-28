@@ -1,7 +1,6 @@
-import { onGetPosts } from "./firebase.js";
-import { where } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+import { onGetPosts, saveComment, onGetComments } from "./firebase.js";
+import { where, doc, getDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 import { auth, db } from './firebase.js';
 
 const tasksContainer = document.getElementById("tasks-container");
@@ -24,12 +23,10 @@ const setupUIForUser = async (user) => {
                 adminItems.forEach(item => item.style.display = 'none');
             }
         } else {
-            // Si no se encuentra el documento, ocultar todo por seguridad
             createItems.forEach(item => item.style.display = 'none');
             adminItems.forEach(item => item.style.display = 'none');
         }
     } else {
-        // Ocultar todo si el usuario no está logueado
         createItems.forEach(item => item.style.display = 'none');
         adminItems.forEach(item => item.style.display = 'none');
     }
@@ -37,12 +34,10 @@ const setupUIForUser = async (user) => {
 
 // --- Carga de Artículos y Eventos ---
 window.addEventListener("DOMContentLoaded", () => {
-    // Observador de autenticación para gestionar la UI
     onAuthStateChanged(auth, user => {
         setupUIForUser(user);
     });
 
-    // Cargar todos los artículos
     onGetPosts((querySnapshot) => {
         let html = "";
         querySnapshot.forEach((doc) => {
@@ -52,7 +47,6 @@ window.addEventListener("DOMContentLoaded", () => {
         tasksContainer.innerHTML = html;
     });
 
-    // Cargar artículos de deportes
     onGetPosts((querySnapshot) => {
         let html = "";
         querySnapshot.forEach((doc) => {
@@ -63,7 +57,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }, where('section', '==', 'deportes'));
 });
 
-// Plantilla para renderizar un artículo
 const renderTask = (id, task) => `
     <div class="col-12 col-sm-6 col-md-4 me-5" data-id="${id}">
         <div class="card card-block">
@@ -84,14 +77,11 @@ const renderTask = (id, task) => `
         </div>
     </div>`;
 
-// --- Event Delegation para los botones de las tarjetas ---
 document.body.addEventListener('click', (event) => {
     const target = event.target;
     const card = target.closest('[data-id]');
     if (!card) return;
-
     const postId = card.dataset.id;
-
     if (target.classList.contains('btn-edit')) {
         window.location.href = `./crearArticulo.html?id=${postId}`;
     }
@@ -99,21 +89,87 @@ document.body.addEventListener('click', (event) => {
 
 // --- Lógica del Modal de Comentarios ---
 const commentsModal = document.getElementById('commentsModal');
+const commentForm = document.getElementById('comment-form');
+let unsubscribeComments; // Variable para guardar el listener de comentarios
+
 if (commentsModal) {
+    // -- Cargar comentarios al abrir el modal --
     commentsModal.addEventListener('show.bs.modal', event => {
-        // Botón que ha activado el modal
         const button = event.relatedTarget;
-        
-        // Extraer el ID del artículo de la tarjeta padre
         const card = button.closest('[data-id]');
         const postId = card.dataset.id;
+        commentForm.dataset.postId = postId; // Guardar ID en el form
 
-        // Aquí cargaremos los comentarios para el postId
-        console.log("Abrir modal para el post:", postId);
+        const commentsList = commentsModal.querySelector('#comments-list');
 
-        // Guardar el postId en el modal para usarlo al enviar un nuevo comentario
-        const form = commentsModal.querySelector('#comment-form');
-        form.dataset.postId = postId;
+        // Escuchar en tiempo real los comentarios de este post
+        unsubscribeComments = onGetComments(postId, (querySnapshot) => {
+            let html = "";
+            if (querySnapshot.empty) {
+                html = "<p class="text-center">No hay comentarios aún. ¡Sé el primero!</p>";
+            } else {
+                querySnapshot.forEach(doc => {
+                    const comment = doc.data();
+                    // Convertir el Timestamp a una fecha legible
+                    const date = comment.createdAt.toDate().toLocaleString();
+                    html += `
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <p class="card-text">${comment.text}</p>
+                                <footer class="blockquote-footer text-end">${comment.authorName} <cite title="Source Title">- ${date}</cite></footer>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            commentsList.innerHTML = html;
+        });
+    });
+
+    // -- Dejar de escuchar al cerrar el modal --
+    commentsModal.addEventListener('hide.bs.modal', () => {
+        if (unsubscribeComments) {
+            unsubscribeComments(); // Detener el listener para no gastar recursos
+        }
+        const commentsList = commentsModal.querySelector('#comments-list');
+        commentsList.innerHTML = ""; // Limpiar la lista
+    });
+}
+
+// -- Enviar un nuevo comentario --
+if (commentForm) {
+    commentForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const postId = commentForm.dataset.postId;
+        const commentText = commentForm.querySelector('#comment-text').value;
+        const user = auth.currentUser;
+
+        if (!user) {
+            alert("Debes iniciar sesión para comentar.");
+            return;
+        }
+
+        if (commentText.trim() === "") return; // No enviar comentarios vacíos
+
+        try {
+            // Obtener el nombre del usuario desde la colección 'users'
+            const userDoc = await getDoc(doc(db, "users", user.uid));
+            const authorName = userDoc.exists() ? userDoc.data().name : "Anónimo";
+
+            const commentData = {
+                authorId: user.uid,
+                authorName: authorName,
+                text: commentText,
+                createdAt: Timestamp.now()
+            };
+
+            await saveComment(postId, commentData);
+            commentForm.reset(); // Limpiar el formulario
+        } catch (error) {
+            console.error("Error al guardar el comentario:", error);
+            alert("Hubo un error al enviar tu comentario.");
+        }
     });
 }
 

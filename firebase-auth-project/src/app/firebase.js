@@ -13,7 +13,9 @@
     deleteDoc,
     doc,
     getDoc,
-    updateDoc,} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+    updateDoc,
+    orderBy // <-- Añadido para ordenar comentarios
+  } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
   import { firebaseConfig } from "./config.js";
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -69,3 +71,24 @@ export const saveUser = async (idUser,name, rol) => {
 
 export const onGetUsers = (callback) =>
   onSnapshot(collection(db, "users"), callback);
+
+// --- Funciones para Comentarios ---
+
+/**
+ * Guarda un nuevo comentario en un artículo específico.
+ * @param {string} postId - El ID del artículo (post).
+ * @param {object} commentData - El objeto del comentario (autor, texto, fecha).
+ */
+export const saveComment = (postId, commentData) => 
+  addDoc(collection(db, `post/${postId}/comments`), commentData);
+
+/**
+ * Obtiene los comentarios de un artículo en tiempo real.
+ * @param {string} postId - El ID del artículo (post).
+ * @param {function} callback - La función que se ejecuta con los datos de los comentarios.
+ */
+export const onGetComments = (postId, callback) => {
+  const commentsCollection = collection(db, `post/${postId}/comments`);
+  const q = query(commentsCollection, orderBy("createdAt", "asc"));
+  return onSnapshot(q, callback);
+};
