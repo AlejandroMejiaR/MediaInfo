@@ -30,11 +30,11 @@
  * @param {string} fecha the description of the Task
  * @param {string} autor the description of the Task
  * @param {string} description the description of the Task
- * @param {string} imgUrl the description of the Task
+ * @param {string} imageUrl the URL of the image for the Task
  * 
  */
-export const savePost = (autor,title, description,section,fecha,imgUrl) =>
-  addDoc(collection(db, "post"), { autor,title, description,section,fecha,imgUrl });
+export const savePost = (autor,title, description,section,fecha,imageUrl) =>
+  addDoc(collection(db, "post"), { autor,title, description,section,fecha,imageUrl });
 
   export const onGetPosts = (callback, filter = null) => {
     let collectionRef = collection(db, "post");
@@ -63,7 +63,7 @@ export const getPosts = () => getDocs(collection(db, "post"));
  * @param {string} name the name of the User
  * @param {string} rol the rol of the User
  */
-export const saveUser = async (idUser,name, rol) =>{
+export const saveUser = async (idUser,name, rol) => {
   await setDoc(doc(db, "users", idUser), {name, rol});
 }
 

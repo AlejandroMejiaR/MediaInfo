@@ -67,7 +67,7 @@ window.addEventListener("DOMContentLoaded", () => {
 const renderTask = (id, task) => `
     <div class="col-12 col-sm-6 col-md-4 me-5" data-id="${id}">
         <div class="card card-block">
-            <img src="${task.imgUrl}" class="card-img-top" alt="imagenArticulo">
+            <img src="${task.imageUrl}" class="card-img-top" alt="imagenArticulo">
             <div class="card-body">
                 <div class="d-flex justify-content-between mb-2 text-muted">
                     <span>${task.autor}</span>
