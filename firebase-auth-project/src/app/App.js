@@ -104,15 +104,14 @@ if (commentsModal) {
 
         // Escuchar en tiempo real los comentarios de este post
         unsubscribeComments = onGetComments(postId, (querySnapshot) => {
-            let html = "";
+            commentsList.innerHTML = ''; // Limpiar antes de renderizar
             if (querySnapshot.empty) {
-                html = `<p class="text-center">No hay comentarios aún. ¡Sé el primero!</p>`;
+                commentsList.innerHTML = `<p class="text-center">No hay comentarios aún. ¡Sé el primero!</p>`;
             } else {
                 querySnapshot.forEach(doc => {
                     const comment = doc.data();
-                    // Convertir el Timestamp a una fecha legible
                     const date = comment.createdAt.toDate().toLocaleString();
-                    html += `
+                    const commentHTML = `
                         <div class="card mb-2">
                             <div class="card-body">
                                 <p class="card-text">${comment.text}</p>
@@ -120,19 +119,19 @@ if (commentsModal) {
                             </div>
                         </div>
                     `;
+                    commentsList.innerHTML += commentHTML;
                 });
             }
-            commentsList.innerHTML = html;
         });
     });
 
     // -- Dejar de escuchar al cerrar el modal --
     commentsModal.addEventListener('hide.bs.modal', () => {
         if (unsubscribeComments) {
-            unsubscribeComments(); // Detener el listener para no gastar recursos
+            unsubscribeComments();
         }
         const commentsList = commentsModal.querySelector('#comments-list');
-        commentsList.innerHTML = ""; // Limpiar la lista
+        commentsList.innerHTML = "";
     });
 }
 
@@ -150,10 +149,9 @@ if (commentForm) {
             return;
         }
 
-        if (commentText.trim() === "") return; // No enviar comentarios vacíos
+        if (commentText.trim() === "") return;
 
         try {
-            // Obtener el nombre del usuario desde la colección 'users'
             const userDoc = await getDoc(doc(db, "users", user.uid));
             const authorName = userDoc.exists() ? userDoc.data().name : "Anónimo";
 
@@ -165,7 +163,7 @@ if (commentForm) {
             };
 
             await saveComment(postId, commentData);
-            commentForm.reset(); // Limpiar el formulario
+            commentForm.reset();
         } catch (error) {
             console.error("Error al guardar el comentario:", error);
             alert("Hubo un error al enviar tu comentario.");
