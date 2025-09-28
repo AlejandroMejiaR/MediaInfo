@@ -106,7 +106,7 @@ if (commentsModal) {
         unsubscribeComments = onGetComments(postId, (querySnapshot) => {
             let html = "";
             if (querySnapshot.empty) {
-                html = "<p class="text-center">No hay comentarios aún. ¡Sé el primero!</p>";
+                html = `<p class="text-center">No hay comentarios aún. ¡Sé el primero!</p>`;
             } else {
                 querySnapshot.forEach(doc => {
                     const comment = doc.data();
