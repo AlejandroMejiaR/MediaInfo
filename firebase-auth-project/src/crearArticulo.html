@@ -33,13 +33,14 @@
           <label for="task-image-url" class="mb-1">URL de la Imagen:</label>
           <input type="text" id="task-image-url" class="form-control mb-3" placeholder="https://ejemplo.com/imagen.png" required/>
           <label for="task-title" class="mb-1">Titulo:</label>
-          <input type="text" id="task-title" class="form-control mb-3" placeholder="Titulo del Artículo" autofocus required />
+          <input type="text" id="task-title" class="form-control mb-1" placeholder="Titulo del Artículo" autofocus required maxlength="100" oninput="updateTitleCharacterCount()"/>
+          <div id="title-character-count" class="text-muted mt-0 mb-3" style="font-size: 0.9em;">0/100</div>
 
           <label for="task-description" class="mb-1">Contenido:</label>
           <textarea id="task-description" rows="3" class="form-control" placeholder="Contenido del Artículo"
             maxlength="1000" oninput="updateCharacterCount()"
             style="min-height: 450px; max-height: 450px; resize: none;" required></textarea>
-          <div id="character-count" class="text mt-0 mb-3">0/1000</div>
+          <div id="character-count" class="text-muted mt-0 mb-3" style="font-size: 0.9em;">0/1000</div>
 
           <div class="d-flex justify-content-between">
             <button class="btn btn-primary" id="btn-task-form">Publicar Artículo</button>
@@ -52,6 +53,11 @@
             const textarea = document.getElementById('task-description');
             const count = document.getElementById('character-count');
             count.textContent = `${textarea.value.length}/1000`;
+          }
+          function updateTitleCharacterCount() {
+            const input = document.getElementById('task-title');
+            const count = document.getElementById('title-character-count');
+            count.textContent = `${input.value.length}/100`;
           }
         </script>
       </div>

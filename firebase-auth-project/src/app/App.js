@@ -1,4 +1,4 @@
-import { onGetPosts, saveComment, onGetComments } from "./firebase.js";
+import { onGetPosts, saveComment, onGetComments, getPost } from "./firebase.js"; // Importar getPost
 import { where, doc, getDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 import { auth, db } from './firebase.js';
@@ -74,6 +74,7 @@ const renderTask = (id, task) => {
                 <p class="card-text">${task.description.substring(0, 100)}...</p>
                 <div class="mt-auto d-flex justify-content-between">
                     <div>
+                        <button class="btn btn-info btn-read-more">Leer Más</button>
                         <button class="btn btn-secondary btn-comment" data-bs-toggle="modal" data-bs-target="#commentsModal">Comentarios</button>
                     </div>
                     <div>
@@ -85,13 +86,33 @@ const renderTask = (id, task) => {
     </div>`;
 };
 
-document.body.addEventListener('click', (event) => {
+document.body.addEventListener('click', async (event) => {
     const target = event.target;
     const card = target.closest('[data-id]');
     if (!card) return;
     const postId = card.dataset.id;
+
     if (target.classList.contains('btn-edit')) {
         window.location.href = `./crearArticulo.html?id=${postId}`;
+    }
+
+    if (target.classList.contains('btn-read-more')) {
+        const docSnap = await getPost(postId);
+        if (docSnap.exists()) {
+            const postData = docSnap.data();
+            
+            const modalTitle = document.getElementById('readMoreModalLabel');
+            const modalBody = document.getElementById('readMoreModalBody');
+
+            modalTitle.textContent = postData.title;
+            modalBody.innerHTML = `
+                <img src="${postData.imageUrl}" class="img-fluid mb-3" alt="Imagen del artículo">
+                <p style="white-space: pre-wrap;">${postData.description}</p>
+            `;
+
+            const readMoreModal = new bootstrap.Modal(document.getElementById('readMoreModal'));
+            readMoreModal.show();
+        }
     }
 });
 
