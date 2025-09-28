@@ -4,7 +4,6 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.2/fi
 import { auth, db } from './firebase.js';
 
 const tasksContainer = document.getElementById("tasks-container");
-const tasksContainerDeportes = document.getElementById("tasks-container-deportes");
 const createItems = document.querySelectorAll('.create');
 const adminItems = document.querySelectorAll('.admin');
 
@@ -40,14 +39,12 @@ const setupUIForUser = async (user) => {
 window.addEventListener("DOMContentLoaded", () => {
     onAuthStateChanged(auth, user => {
         setupUIForUser(user).then(() => {
-            // Volver a cargar los posts después de que la UI del usuario esté configurada
-            loadAllPosts();
-            loadDeportesPosts();
+            loadPosts();
         });
     });
 });
 
-const loadAllPosts = () => {
+const loadPosts = () => {
     onGetPosts((querySnapshot) => {
         let html = "";
         querySnapshot.forEach((doc) => {
@@ -58,42 +55,29 @@ const loadAllPosts = () => {
     });
 };
 
-const loadDeportesPosts = () => {
-    onGetPosts((querySnapshot) => {
-        let html = "";
-        querySnapshot.forEach((doc) => {
-            const task = doc.data();
-            html += renderTask(doc.id, task);
-        });
-        tasksContainerDeportes.innerHTML = html;
-    }, where('section', '==', 'deportes'));
-};
-
 const renderTask = (id, task) => {
-    // Lógica para mostrar el botón de editar solo al autor
     const isAuthor = currentUserId && currentUserId === task.authorId;
     const editButton = isAuthor 
         ? `<button class="btn btn-primary btn-edit">Editar</button>`
         : '';
 
     return `
-    <div class="col-12 col-sm-6 col-md-4 me-5" data-id="${id}">
-        <div class="card card-block">
-            <img src="${task.imageUrl}" class="card-img-top" alt="imagenArticulo">
-            <div class="card-body">
+    <div class="col-12 col-md-6 col-lg-4 mb-4" data-id="${id}">
+        <div class="card h-100"> 
+            <img src="${task.imageUrl}" class="card-img-top" alt="imagenArticulo" style="height: 200px; object-fit: cover;">
+            <div class="card-body d-flex flex-column">
                 <div class="d-flex justify-content-between mb-2 text-muted">
                     <span>${task.autor}</span>
                     <span>${task.fecha}</span>
                 </div>
                 <h5 class="card-title">${task.title}</h5>
-                <p class="card-text">${task.description}</p>
+                <p class="card-text">${task.description.substring(0, 100)}...</p>
                 <div class="mt-auto d-flex justify-content-between">
                     <div>
-                        <button class="btn btn-primary btn-comment" data-bs-toggle="modal" data-bs-target="#commentsModal">Comentarios</button>
+                        <button class="btn btn-secondary btn-comment" data-bs-toggle="modal" data-bs-target="#commentsModal">Comentarios</button>
                     </div>
                     <div>
                         ${editButton}
-                        <button class="btn btn-primary btn-delete admin">Ocultar</button>
                     </div>
                 </div>
             </div>
@@ -114,21 +98,19 @@ document.body.addEventListener('click', (event) => {
 // --- Lógica del Modal de Comentarios ---
 const commentsModal = document.getElementById('commentsModal');
 const commentForm = document.getElementById('comment-form');
-let unsubscribeComments; // Variable para guardar el listener de comentarios
+let unsubscribeComments; 
 
 if (commentsModal) {
-    // -- Cargar comentarios al abrir el modal --
     commentsModal.addEventListener('show.bs.modal', event => {
         const button = event.relatedTarget;
         const card = button.closest('[data-id]');
         const postId = card.dataset.id;
-        commentForm.dataset.postId = postId; // Guardar ID en el form
+        commentForm.dataset.postId = postId;
 
         const commentsList = commentsModal.querySelector('#comments-list');
 
-        // Escuchar en tiempo real los comentarios de este post
         unsubscribeComments = onGetComments(postId, (querySnapshot) => {
-            commentsList.innerHTML = ''; // Limpiar antes de renderizar
+            commentsList.innerHTML = ''; 
             if (querySnapshot.empty) {
                 commentsList.innerHTML = `<p class="text-center">No hay comentarios aún. ¡Sé el primero!</p>`;
             } else {
@@ -149,7 +131,6 @@ if (commentsModal) {
         });
     });
 
-    // -- Dejar de escuchar al cerrar el modal --
     commentsModal.addEventListener('hide.bs.modal', () => {
         if (unsubscribeComments) {
             unsubscribeComments();
@@ -159,7 +140,6 @@ if (commentsModal) {
     });
 }
 
-// -- Enviar un nuevo comentario --
 if (commentForm) {
     commentForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -194,27 +174,3 @@ if (commentForm) {
         }
     });
 }
-
-// --- Lógica de Scroll Horizontal ---
-const setupHorizontalScroll = (container) => {
-    let mouseDown = false;
-    let startX, scrollLeft;
-
-    container.addEventListener('mousedown', (e) => {
-        mouseDown = true;
-        startX = e.pageX - container.offsetLeft;
-        scrollLeft = container.scrollLeft;
-    });
-    container.addEventListener('mouseleave', () => mouseDown = false);
-    container.addEventListener('mouseup', () => mouseDown = false);
-    container.addEventListener('mousemove', (e) => {
-        if (!mouseDown) return;
-        e.preventDefault();
-        const x = e.pageX - container.offsetLeft;
-        const walk = (x - startX) * 1;
-        container.scrollLeft = scrollLeft - walk;
-    });
-};
-
-setupHorizontalScroll(tasksContainer);
-setupHorizontalScroll(tasksContainerDeportes);
