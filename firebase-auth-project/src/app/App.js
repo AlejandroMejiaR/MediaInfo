@@ -68,16 +68,18 @@ const renderTask = (id, task) => `
     <div class="col-12 col-sm-6 col-md-4 me-5" data-id="${id}">
         <div class="card card-block">
             <img src="${task.imageUrl}" class="card-img-top" alt="imagenArticulo">
-            <div class="card-body" style="height: 320px;">
+            <div class="card-body">
                 <div class="d-flex justify-content-between mb-2 text-muted">
                     <span>${task.autor}</span>
                     <span>${task.fecha}</span>
                 </div>
                 <h5 class="card-title">${task.title}</h5>
-                <p class="card-text" style="height: 120px; overflow-y: auto;">${task.description}</p>
-                <button class="btn btn-primary btn-comment" data-bs-toggle="modal" data-bs-target="#commentsModal">Comentarios</button>
-                <button class="btn btn-primary btn-edit create">Editar</button>
-                <button class="btn btn-primary btn-delete admin">Ocultar</button>
+                <p class="card-text">${task.description}</p>
+                <div class="mt-auto">
+                    <button class="btn btn-primary btn-comment" data-bs-toggle="modal" data-bs-target="#commentsModal">Comentarios</button>
+                    <button class="btn btn-primary btn-edit create">Editar</button>
+                    <button class="btn btn-primary btn-delete admin">Ocultar</button>
+                </div>
             </div>
         </div>
     </div>`;
