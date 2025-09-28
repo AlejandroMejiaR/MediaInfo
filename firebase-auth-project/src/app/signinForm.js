@@ -1,4 +1,5 @@
 
+import './main.js'
 import { GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js"
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js"
 import { auth } from './firebase.js'
