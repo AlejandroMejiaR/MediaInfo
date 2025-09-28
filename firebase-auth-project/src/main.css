@@ -47,3 +47,14 @@
 .card .mt-auto {
     margin-top: auto; /* Push buttons to the bottom */
 }
+
+.btn-purple {
+    background-color: #83578F;
+    color: white;
+    border-color: #83578F;
+}
+
+.btn-purple:hover {
+    background-color: #6a4674;
+    border-color: #6a4674;
+}

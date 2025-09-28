@@ -74,8 +74,8 @@ const renderTask = (id, task) => {
                 <p class="card-text">${task.description.substring(0, 100)}...</p>
                 <div class="mt-auto d-flex justify-content-between">
                     <div>
-                        <button class="btn btn-info btn-read-more">Leer Más</button>
-                        <button class="btn btn-secondary btn-comment" data-bs-toggle="modal" data-bs-target="#commentsModal">Comentarios</button>
+                        <button class="btn btn-purple btn-read-more">Leer Más</button>
+                        <button class="btn btn-purple btn-comment" data-bs-toggle="modal" data-bs-target="#commentsModal">Comentarios</button>
                     </div>
                     <div>
                         ${editButton}
