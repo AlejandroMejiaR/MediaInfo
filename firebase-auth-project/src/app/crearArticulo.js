@@ -17,19 +17,17 @@ const ano = fecha.getFullYear();
 const fechaString = `${dia}/${mes}/${ano}`;
 
 let autor = "";
-let authorId = ""; // Variable para el UID del autor
+let authorId = ""; 
 let editStatus = false;
 let id = '';
 
-// Obtener nombre y UID del usuario
 onAuthStateChanged(auth, (user) => {
     if (user) {
         autor = user.displayName;
-        authorId = user.uid; // Guardamos el UID
+        authorId = user.uid;
     }
 });
 
-// --- Lógica de Edición y Borrado ---
 document.addEventListener('DOMContentLoaded', async () => {
     const params = new URLSearchParams(window.location.search);
     id = params.get('id');
@@ -41,21 +39,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         taskForm['task-title'].value = task.title;
         taskForm['task-description'].value = task.description;
-        taskForm['task-section'].value = task.section;
         taskForm['task-image-url'].value = task.imageUrl;
 
-        // Cambiar texto y mostrar botones de acción
         taskForm.querySelector('#btn-task-form').innerText = 'Actualizar';
         btnDelete.style.display = 'block';
 
     } else {
-        // Asegurarse de que el botón de eliminar esté oculto si no es modo edición
         btnDelete.style.display = 'none';
     }
 });
 
 btnDelete.addEventListener('click', async (event) => {
-    event.preventDefault(); // Prevenir el envío del formulario
+    event.preventDefault();
 
     if (confirm("¿Estás seguro de que quieres eliminar este artículo? Esta acción no se puede deshacer.")) {
         try {
@@ -76,7 +71,6 @@ taskForm.addEventListener("submit", async (e) => {
 
     const title = taskForm["task-title"].value;
     const description = taskForm["task-description"].value;
-    const section = taskForm["task-section"].value;
     const imageUrl = taskForm["task-image-url"].value;
 
     if (!authorId) {
@@ -86,13 +80,12 @@ taskForm.addEventListener("submit", async (e) => {
 
     try {
         if (!editStatus) {
-            await savePost(authorId, autor, title, description, section, fechaString, imageUrl);
+            await savePost(authorId, autor, title, description, fechaString, imageUrl);
             showMessage("El articulo ha sido publicado.");
         } else {
             await updatePost(id, {
                 title: title,
                 description: description,
-                section: section,
                 imageUrl: imageUrl
             });
             showMessage("El artículo ha sido actualizado.");
