@@ -1,106 +1,146 @@
-.bg-custom-color {
-    background-color: #103F52;
-}
-.bg-color-form{
-    background-color: #7EA6BF;
-} 
-.font-family{
-    font-family: 'Fredoka', sans-serif;
-}
-.text-color{
-    color: #83578F;
-    font-weight: bold;
-    font-size: 20px;
-}
-.navbar {
-    transition: top 0.6s;
-}
-.navbar.hide {
-    top: -50px;
-}
-body{
-    background-color: #103F52;
-}
-
-.overflow-auto {
-    overflow-x: auto;
-    min-width: 1140px;
-}
-.card {
-    min-width: 416px;
-    min-height: 620px;
-    border: 2px solid black;
-    border-radius: 5px; 
-    transition: transform 0.5s ease-in-out;
-    transform: scale(0.95); /* La tarjeta comienza al 95% de su tamaño original */
-    transform-origin: center center; /* La tarjeta se agranda desde el centro */
-}
-.card:hover {
-    transform: scale(1.0); /* La tarjeta se agranda al 100% cuando el cursor está encima */
-}
-.card-body{
-    min-height: 220px;
-}
-.card-img-top {
-    object-fit: cover; 
-    transform: scale(1.003); /* La tarjeta comienza al 95% de su tamaño original */
-    min-width: 400px;
-    min-height: 400px;
-    max-width: 450px;
-    max-height: 400px;
-}
-
-.card-text {
-    color: black;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* Número de líneas que quieres mostrar */
-    -webkit-box-orient: vertical;
-}
-.card-title{
-    font-weight: bold
-}
-.dropdown-menu {
-    display: none;
-    position: absolute;
+/* Estilos para el cuerpo de la página de inicio de sesión */
+.body-signin {
     margin: 0;
-    background-color: #1F6D8C;
-}
-.dropdown:hover .dropdown-menu {
-    display: block;
-}
-.dropdown-item{
-    color: white;
-}
-.nav-item{
-    right: 0%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(to right, #4A00E0, #8E2DE2);
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#White-text{
-    color: white;
+/* Contenedor del formulario */
+.container-signin {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Estilos del formulario */
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+}
+
+.form__icon {
+    width: 80px;
+    margin-bottom: 1rem;
+}
+
+.form__title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #fff;
+}
+
+.form__input-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.form__input-container img {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+}
+
+.form__input-container input {
+    width: 100%;
+    padding: 0.8rem 0.8rem 0.8rem 40px;
+    border: none;
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+.form__input-container input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.form__input-container input:focus {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.form__button {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 25px;
+    background-color: #fff;
+    color: #4A00E0;
+    font-size: 1.2rem;
     font-weight: bold;
-    font-size: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.text-muted {
-    color: #aaa; 
+.form__button:hover {
+    background-color: #f0f0f0;
 }
 
-@media only screen and (max-width: 600px) {
-  .overflow-auto {
-    min-width: 100%; /* Ajusta este valor al ancho que desees para dispositivos móviles */
-  }
+.form__text {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: black;
 }
 
-/* Esto hará que la barra de desplazamiento sea transparente */
-.row.flex-row.flex-nowrap.overflow-auto::-webkit-scrollbar {
-    height: 0; /* Ajusta esto al grosor que desees para la barra de desplazamiento horizontal */
+.form__link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.row.flex-row.flex-nowrap.overflow-auto::-webkit-scrollbar-track {
-    background: transparent; 
+.form__link:hover {
+    text-decoration: underline;
 }
 
-.row.flex-row.flex-nowrap.overflow-auto::-webkit-scrollbar-thumb {
-    background: transparent;
+.form__divider {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: 1.5rem 0;
+}
+
+.form__button--google {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    background-color: #fff;
+    color: black;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form__button--google:hover {
+    background-color: #f2f2f2;
+}
+
+.form__button--google img {
+    width: 20px;
+    margin-right: 10px;
+}
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }

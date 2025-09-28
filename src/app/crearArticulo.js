@@ -57,7 +57,7 @@ btnDelete.addEventListener('click', async (event) => {
             await deletePost(id);
             showMessage("El artículo ha sido eliminado.");
             setTimeout(() => {
-                window.location.href = "./App.html";
+                window.location.href = "./articles.html";
             }, 1500);
         } catch (error) {
             console.error("Error al eliminar el artículo:", error);
@@ -93,7 +93,7 @@ taskForm.addEventListener("submit", async (e) => {
         
         taskForm.reset();
         setTimeout(() => {
-            window.location.href = "./App.html";
+            window.location.href = "./articles.html";
         }, 1500);
 
     } catch (error) {
