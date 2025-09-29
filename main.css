@@ -218,3 +218,7 @@ div.fw-semibold.text-secondary.text-black {
 #tasks-container .card .card-text {
     color: black !important;
 }
+
+#commentsModal .modal-body {
+    color: black !important;
+}
