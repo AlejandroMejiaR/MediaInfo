@@ -222,3 +222,12 @@ div.fw-semibold.text-secondary.text-black {
 #commentsModal .modal-body {
     color: black !important;
 }
+
+#readMoreModal .modal-title {
+    color: black !important;
+    font-weight: bold !important;
+}
+
+#readMoreModal .modal-body {
+    color: black !important;
+}
