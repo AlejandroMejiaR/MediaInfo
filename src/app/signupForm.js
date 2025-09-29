@@ -20,7 +20,7 @@ signupForm.addEventListener('submit', async (e) => {
         const id = ("User ID: ", userCredentials.user.uid);
         await updateProfile(userCredentials.user, {displayName: username});  
         await saveUser(id,username,rol);
-        window.location.href = 'App.html';
+        window.location.href = 'articles.html';
         //
         //showMessage("welcome " + userCredentials.user.email)
 
