@@ -138,6 +138,74 @@ body {
     z-index: -1;
 }
 
-.text-black {
-    color: black;
+body.bg-custom-color {
+    background-color: #000 !important;
+}
+
+div.bg-color-form {
+    background-color: #333 !important;
+    color: #fff !important;
+}
+
+div.text-color {
+    color: #fff !important;
+}
+
+input.form-control.bg-light, select.form-control.bg-light {
+    background-color: #555 !important;
+    color: #fff !important;
+    border: 1px solid #555 !important;
+}
+
+input.form-control.bg-light::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+div.input-group-text.bg-transparent {
+    background-color: #555 !important;
+    border: 1px solid #555 !important;
+    border-right: 0px !important;
+}
+
+button[style*="background-color: #83578F"] {
+    background-color: #555 !important;
+    color: #fff !important;
+}
+
+button[style*="background-color: #83578F"]:hover {
+    background-color: #777 !important;
+}
+
+div.text-black {
+    color: #fff !important;
+}
+
+.text-secondary {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+a.text-primary {
+    color: #4dabf7 !important;
+}
+
+div.border-bottom {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+div.border-bottom span.bg-white {
+    background-color: #333 !important;
+}
+
+div#google-login.btn.btn-light {
+    background-color: #333 !important;
+    border: 1px solid #555 !important;
+    color: #fff !important;
+}
+
+div#google-login.btn.btn-light:hover {
+    background-color: #555 !important;
+}
+
+div.fw-semibold.text-secondary.text-black {
+    color: #fff !important;
 }
