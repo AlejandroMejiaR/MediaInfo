@@ -209,3 +209,12 @@ div#google-login.btn.btn-light:hover {
 div.fw-semibold.text-secondary.text-black {
     color: #fff !important;
 }
+
+#tasks-container .card .card-title {
+    color: black !important;
+    font-weight: bold !important;
+}
+
+#tasks-container .card .card-text {
+    color: black !important;
+}
