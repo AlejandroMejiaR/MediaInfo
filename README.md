@@ -1,13 +1,12 @@
 # MediaInfo
 
-MediaInfo is a web application that allows users to search for and view information about movies, series, and other multimedia content. Users can register, log in, and save their favorite articles.
+MediaInfo is a web application that allows users to create and manage articles about multimedia content. Users can register, log in, and manage their posts.
 
 ## Features
 
-- Search for movies and series.
-- View details of multimedia content.
+- Create, Read, Update, and Delete (CRUD) operations for articles.
 - User registration and login.
-- Save and manage favorite articles.
+- Comment on articles.
 - Interactive and responsive user interface.
 
 ## Technologies Used
@@ -17,17 +16,17 @@ MediaInfo is a web application that allows users to search for and view informat
 - JavaScript
 - Firebase (Authentication and Realtime Database)
 
-## Installation and Usage
+## Screenshots
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/AlejandroMejiaR/MediaInfo.git
-   ```
-2. Open the `index.html` file in your browser to start the application.
+I have created an `images` folder in your project. To add images to this README:
 
-## Contributions
+1.  Add your image files to the `images` folder.
+2.  Use the following markdown syntax to display them:
 
-Contributions are welcome. If you have any ideas or suggestions, please open an issue or submit a pull request.
+`![Alt text for your image](images/your-image-name.png)`
+
+For example:
+`![Login Screen](images/login.png)`
 
 ## Author
 
