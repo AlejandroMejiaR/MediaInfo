@@ -18,26 +18,26 @@ MediaInfo is a web application that allows users to create and manage articles a
 
 ## Screenshots
 
-![Main Page](images/1.png)
-_Main page with articles._
-
 ![Login](images/2.png)
 _Login form._
 
-![Register](images/3.png)
+![Register](images/1.png)
 _Registration form._
 
-![Articles View](images/4.png)
-_View of all articles._
+![Main Page](images/3.png)
+_Main page with articles._
 
-![Create/Edit Article](images/5.png)
-_Form to create or edit an article._
+![View of all articles.](images/4.png)
+_View full article._
 
-![Read More](images/6.png)
-_Modal showing the full article._
-
-![Comments](images/7.png)
+![Comments](images/5.png)
 _Modal to view and add comments._
+
+![Edit Article](images/6.png)
+_Form to edit an article._
+
+![Create Article](images/7.png)
+_Form to create an article._
 
 ## Author
 
