@@ -18,15 +18,26 @@ MediaInfo is a web application that allows users to create and manage articles a
 
 ## Screenshots
 
-I have created an `images` folder in your project. To add images to this README:
+![Main Page](images/1.png)
+_Main page with articles._
 
-1.  Add your image files to the `images` folder.
-2.  Use the following markdown syntax to display them:
+![Login](images/2.png)
+_Login form._
 
-`![Alt text for your image](images/your-image-name.png)`
+![Register](images/3.png)
+_Registration form._
 
-For example:
-`![Login Screen](images/login.png)`
+![Articles View](images/4.png)
+_View of all articles._
+
+![Create/Edit Article](images/5.png)
+_Form to create or edit an article._
+
+![Read More](images/6.png)
+_Modal showing the full article._
+
+![Comments](images/7.png)
+_Modal to view and add comments._
 
 ## Author
 
