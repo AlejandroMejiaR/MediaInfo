@@ -2,6 +2,8 @@
 
 MediaInfo is a web application that allows users to create and manage articles about multimedia content. Users can register, log in, and manage their posts.
 
+[Check MediaInfo](https://alejandromejiar.github.io/MediaInfo/)
+
 ## Features
 
 - Create, Read, Update, and Delete (CRUD) operations for articles.
