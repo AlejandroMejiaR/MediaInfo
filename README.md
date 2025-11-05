@@ -1,8 +1,9 @@
-# MediaInfo
+<h1><a href="https://alejandromejiar.github.io/MediaInfo/";">MediaInfo</a></h1>
+
 
 MediaInfo is a web application that allows users to create and manage articles about multimedia content. Users can register, log in, and manage their posts.
 
-[Check MediaInfo](https://alejandromejiar.github.io/MediaInfo/)
+
 
 ## Features
 
